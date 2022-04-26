@@ -3,7 +3,9 @@
 ## Table of Contents
 [Anaconda](https://github.com/hk126NWP/cs-note/edit/main/README.md#anaconda)\
 [Docker](https://github.com/hk126NWP/cs-note/edit/main/README.md#docker)
-1. [Docker-WRF](https://github.com/hk126NWP/cs-note/edit/main/README.md#docker-wrf)
+1. [NCL](https://github.com/hk126NWP/cs-note/edit/main/README.md#dtcenterncl-httpshubdockercomrdtcenterncl)
+2. [WRF](https://github.com/hk126NWP/cs-note/edit/main/README.md#wrf)
+3. [OpenFoam](https://github.com/hk126NWP/cs-note/edit/main/README.md#openfoam)
 
 # Anaconda
 ```
@@ -60,4 +62,30 @@ Docker 提供另一種容器 Volume 來解決著個問題，我們可以把它�
 > docker run -it -v /home/user1/storage:/storage centos /bin/bash # home-dir:container-dir Image Command
 > ls /home/user1/storage
 ```
-## Docker-WRF
+### dtcenter/ncl [https://hub.docker.com/r/dtcenter/ncl]
+container-dtc-nwp
+The Developmental Testbed Center (DTC) developed NWP end-to-end systems in Docker containers for community use.\
+For general info on DTC NWP containers: https://dtcenter.org/community-code/numerical-weather-prediction-nwp-containers \
+For accessing the DTC NWP containers online tutorial: https://dtcenter.org/nwp-containers-online-tutorial/introduction
+```
+> docker pull dtcenter/ncl
+```
+## WRF
+(WPS+WRF) + ncview + ncl + python + plot-map? for different version of WRF
+
+## OpenFoam
+https://hub.docker.com/u/openfoam 
+```
+Image of OpenFOAM v7 and ParaView 5.6.0 on Ubuntu 18.04 from the OpenFOAM Foundation
+> docker pull openfoam/openfoam7-paraview56
+Image of OpenFOAM v8 and ParaView 5.6.0 on Ubuntu 18.04 from the OpenFOAM Foundation
+> docker pull openfoam/openfoam8-paraview56
+> docker pull openfoam/openfoam9-paraview56
+```
+How to use:
+```
+> docker container run -it openfoam/openfoam8-paraview56
+By adding the -v switch we’re asking Docker to mount our current working directory ($PWD) as /data in the container. \
+We’ve also added the -w switch to tell Docker that we’d like to be in /data when the container starts.
+> docker container run -ti --rm -v $PWD:/data -w /data openfoam/openfoam8-paraview56
+```
